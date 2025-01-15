@@ -9,10 +9,10 @@ gen:
 	--go-grpc_opt=paths=source_relative
 		
 build:
-	@go build -o cmd/server.exe .
+	@go build -o bin/server.exe ./cmd/main.go
 
 run:
-	@./cmd/server.exe
+	@./bin/server.exe
 
 test:
 	@go test -v ./test/...
