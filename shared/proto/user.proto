@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package simple;
+
+option go_package = "github.com/ashvegeta/user-service";
+
+service User {
+    rpc SayHello (HelloRequest) returns (HelloResponse);
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string message = 1;
+}

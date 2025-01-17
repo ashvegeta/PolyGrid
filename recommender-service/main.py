@@ -1,12 +1,15 @@
 from flask import Flask, jsonify, request
-
+import grpc
+import generated.user_pb2_grpc as user_pb2_grpc
+import generated.user_pb2 as user_pb2
+ 
 app = Flask(__name__)
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
     data = request.json
-    # Logic for generating recommendations based on input data
-    recommendations = []  # Placeholder for recommendations
+    user_name = data.get('name', 'default_user')
+    recommendations = {"movies" : ["movie1", "movie2"]}  # Placeholder for recommendations
     return jsonify(recommendations)
 
 if __name__ == '__main__':
