@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package analytics;
+
+// The request message containing the user's message.
+message SendLogRequest {
+    string message = 1;
+}
+
+// The response message containing the analytics service's response.
+message SendLogResponse {
+    string message = 1;
+}
+
+// The analytics service definition.
+service AnalyticsService {
+    // Sends a log to the analytics service.
+    rpc SendLog(SendLogRequest) returns (SendLogResponse);
+}
