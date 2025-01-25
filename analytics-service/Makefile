@@ -5,4 +5,4 @@ gen:
 	analytics.proto 
 
 run:
-	@python analytics_server.py
+	@python server.py
