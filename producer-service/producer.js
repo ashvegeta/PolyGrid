@@ -2,6 +2,7 @@ const { Kafka } = require("kafkajs");
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 const path = require("path");
+require("dotenv").config(); // Load environment variables from .env file
 
 // Load the protobuf
 const PROTO_PATH = path.join(__dirname, "./proto/analytics.proto");
@@ -16,7 +17,7 @@ const analyticsProto = grpc.loadPackageDefinition(packageDefinition).analytics;
 
 // Create gRPC client
 const client = new analyticsProto.AnalyticsService(
-  "localhost:8080",
+  process.env.ANALYTICS_GRPC_ADDR,
   grpc.credentials.createInsecure()
 );
 
@@ -25,7 +26,7 @@ async function produce() {
     // Define Kafka client configuration
     const kafka = new Kafka({
       clientId: "polygrid-producer",
-      brokers: ["localhost:9092"],
+      brokers: [process.env.KAFKA_ADDR],
     });
 
     // Create a producer instance

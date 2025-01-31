@@ -21,7 +21,7 @@ func consume(wg *sync.WaitGroup, gRPCClient pb.AnalyticsServiceClient) {
 	config.Consumer.Return.Errors = true
 
 	// Define Kafka brokers
-	brokers := []string{"localhost:9092"} // Replace with your Kafka broker's address
+	brokers := []string{os.Getenv("KAFKA_ADDR")} // Use environment variable for Kafka address
 
 	// Create a new consumer
 	consumer, err := sarama.NewConsumer(brokers, config)
@@ -81,7 +81,7 @@ func main() {
 	var wg sync.WaitGroup
 
 	// open new connection to gRPC server
-	conn, err := grpc.NewClient("localhost:8080", grpc.WithInsecure())
+	conn, err := grpc.NewClient(os.Getenv("ANALYTICS_GRPC_ADDR"), grpc.WithInsecure())
 	gRPCClient := pb.NewAnalyticsServiceClient(conn)
 	if err != nil {
 		fmt.Printf("ERROR : failed to dial gRPC server: %v\n", err)
