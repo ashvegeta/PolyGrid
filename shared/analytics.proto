@@ -5,6 +5,7 @@ package analytics;
 // The request message containing the user's message.
 message SendLogRequest {
     string message = 1;
+    string senderType = 2;
 }
 
 // The response message containing the analytics service's response.
