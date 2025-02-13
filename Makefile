@@ -18,5 +18,5 @@ setup-kafka: load-env
 	@docker exec --workdir /opt/kafka/bin/ -it broker sh -c "./kafka-topics.sh --bootstrap-server localhost:9092 --create --topic analytics"
 
 run: load-env
-	@echo 2. starting kafka server
+	@echo 2. starting kafka broker
 	@docker start broker
